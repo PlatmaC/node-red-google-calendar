@@ -16,12 +16,13 @@ module.exports = function(RED) {
             n.tittle = msg.tittle ? msg.tittle : n.tittle
             n.description = msg.description ? msg.description : n.description
             n.location = msg.location ? msg.location : n.location
-            n.arrAttend = msg.arrAttend ? msg.arrAttend : n.arrAttend
+            n.arrAttend = msg.arrAttend ? msg.arrAttend : n.arrAttend ? n.arrAttend : []
 
             var timeStart = msg.start ? msg.start : n.time.split(" - ")[0];
             var timeEnd = msg.end ? msg.end : n.time.split(" - ")[1];
 
-            var arrAttend = [];        
+            var arrAttend = [];     
+            if (n.arrAttend.length===0){   
             if (n.attend > 0) {
                 for (let index = 1; index < parseInt(n.attend) + 1; index++) {
                     if(n["email" + index] || n["name" + index]) {
@@ -33,9 +34,10 @@ module.exports = function(RED) {
                         }
                     }
                 }            
-            }                
-
-            var api = 'https://www.googleapis.com/calendar/v3/calendars/'        
+            }         
+        }        else { arrAttend = n.arrAttend}
+        
+        var api = 'https://www.googleapis.com/calendar/v3/calendars/'        
             var newObj = {
                 summary: n.tittle,
                 description: n.description,
@@ -44,7 +46,7 @@ module.exports = function(RED) {
                 end: {dateTime: new Date(timeEnd)},
                 attendees: arrAttend
             }
-            
+
             var linkUrl = api + encodeURIComponent(calendarId) + '/events'
             var opts = {
                 method: "POST",
