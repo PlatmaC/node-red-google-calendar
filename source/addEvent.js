@@ -17,9 +17,14 @@ module.exports = function(RED) {
             n.description = msg.description ? msg.description : n.description
             n.location = msg.location ? msg.location : n.location
             n.arrAttend = msg.arrAttend ? msg.arrAttend : n.arrAttend ? n.arrAttend : []
-
-            var timeStart = msg.start ? msg.start : n.time.split(" - ")[0];
-            var timeEnd = msg.end ? msg.end : n.time.split(" - ")[1];
+            n.conference = msg.conference ? msg.conference : n.conference
+            var timeStart; 
+            var timeEnd;
+            let timezone = msg.timezone ? msg.timezone : n.timezone
+                timeStart= msg.start ? msg.start : n.time.split(" - ")[0];
+                timeEnd= msg.end ? msg.end : n.time.split(" - ")[1];
+             timeStart += `${timezone}`;
+             timeEnd += `${timezone}`;
 
             var arrAttend = [];     
             if (n.arrAttend.length===0){   
@@ -37,6 +42,10 @@ module.exports = function(RED) {
             }         
         }        else { arrAttend = n.arrAttend}
         
+        const conferenceData = {
+            createRequest: {requestId: requestIdGenerator()}
+          }
+          
         var api = 'https://www.googleapis.com/calendar/v3/calendars/'        
             var newObj = {
                 summary: n.tittle,
@@ -44,10 +53,13 @@ module.exports = function(RED) {
                 location: n.location,
                 start: {dateTime: new Date(timeStart)},
                 end: {dateTime: new Date(timeEnd)},
-                attendees: arrAttend
+                attendees: arrAttend,
             }
 
-            var linkUrl = api + encodeURIComponent(calendarId) + '/events'
+            if (n.conference){
+                newObj.conferenceData = conferenceData;
+            }
+            var linkUrl = api + encodeURIComponent(calendarId) + '/events?conferenceDataVersion=1'
             var opts = {
                 method: "POST",
                 url: linkUrl,
@@ -64,7 +76,7 @@ module.exports = function(RED) {
                     return;
                 }            
                 if (JSON.parse(body).kind == "calendar#event") {
-                    msg.payload = "Successfully add event to " + calendarId
+                    msg.payload = `Successfully add event to ${calendarId}. ${JSON.parse(body).hangoutLink ? `Link for Meet: ${JSON.parse(body).hangoutLink}`: ""}`
                 } else {
                     msg.payload = "Fail"
                 }
@@ -78,6 +90,10 @@ module.exports = function(RED) {
     function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
+    }
+
+    function requestIdGenerator(){
+        return (Math.random() + 1).toString(36);
     }
 
     RED.httpAdmin.get('/cal', function(req, res) {              

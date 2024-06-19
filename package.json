@@ -1,6 +1,6 @@
 {
     "name": "@platmac/node-red-google-calendar",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "author": "Hooke Jr. <platma@platma.com>",
     "description": "The simplest of simple nodes with google calendar",
     "license": "Apache-2.0",

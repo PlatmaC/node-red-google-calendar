@@ -6,6 +6,8 @@
         defaults: {
             google: { type: "google-credentials", required: true },
             calendarId2: { value: "" },
+            timezone: {value: "+0"},
+            conference: {value: false},
             tittle: { value: "" },
             description: { value: "" },
             location: { value: "" },
@@ -133,6 +135,41 @@
         <input type="text" id="node-input-location" placeholder="Ho Chi Minh">
     </div>    
     <div class="form-row">
+        <label for="node-input-conference"><i class="fa fa-map-marker"></i> Conference</label>
+        <input type="checkbox" id="node-input-conference" placeholder="false">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timezone"><i class="fa fa-map-marker"></i> Timezone</label>
+        <select type="text" id="node-input-timezone">
+            <option value="-11">-11</option>
+            <option value="-10">-10</option>
+            <option value="-9">-9</option>
+            <option value="-8">-8</option>
+            <option value="-7">-7</option>
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option value="+0">0</option>
+            <option value="+1">+1</option>
+            <option value="+2">+2</option>
+            <option value="+3">+3</option>
+            <option value="+4">+4</option>
+            <option value="+5">+5</option>
+            <option value="+6">+6</option>
+            <option value="+7">+7</option>
+            <option value="+8">+8</option>
+            <option value="+9">+9</option>
+            <option value="+10">+10</option>
+            <option value="+11">+11</option>
+            <option value="+12">+12</option>
+            <option value="+13">+13</option>
+            <option value="+14">+14</option>
+        </select>
+    </div>        
+    <div class="form-row">
         <label for="node-input-time"><i class="fa fa-calendar"></i> Time</label>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/taminhhienmor/node-red-contrib-google-calendar/source/datePicker.css" />
         <input type="text" id="node-input-time" value="26/02/2020 12:00 AM - 26/02/2020 03:00 PM" >
@@ -210,6 +247,10 @@
             <li><b>title</b> - the summary string from the calendar entry</li>
             <li><b>description</b> - the description from the calendar entry</li>
             <li><b>location</b> - the location string from the calendar entry</li>
+            <li><b>conference</b> - flag for auto-create of google-meet conference</li>  
+            <li><b>conferenceSolutionType</b> - select solkution for conference</li>  
+            <li><b>allday</b> - flag to make event 00:00 - 23:59</li>  
+            <li><b>timezone</b> - timezone</li>  
             <li><b>start</b> - date of start time</li>        
             <li><b>end</b> - date of end time</li>        
         </ul>
