@@ -23,19 +23,28 @@ module.exports = function (RED) {
                 title = n.title || msg.title || "",
                 location = n.location || msg.location || "",
                 emailNotify = n.emailNotify || msg.emailNotify ? "?sendUpdates=all" : "";
-
+                n.conference = msg.conference ? msg.conference : n.conference
+                const confecerceCreate = `${emailNotify.length>0 ? '&' : '?'}conferenceDataVersion=1`;
             if( !eventId || !calendarId ) {
                 node.status({ fill: "red", shape: "ring", text: "Please specify eventId and calendarId" });
                 return;
             }
 
+            const conferenceData = {
+                createRequest: {requestId: requestIdGenerator()}
+            }
+
+          
             let baseApi = 'https://www.googleapis.com/calendar/v3/calendars/';
             let patchObj = {
                 summary: title,
                 description: description,
                 location: location
             }
-            
+            if (n.conference){
+                patchObj.conferenceData = conferenceData;
+            }
+
             //remove empty fields
             Object.keys(patchObj).forEach(key => patchObj[key] === '' && delete patchObj[key]);
             
@@ -44,7 +53,7 @@ module.exports = function (RED) {
                 return;
             }
 
-            var linkUrl = baseApi + encodeURIComponent(calendarId) + '/events/' + eventId + emailNotify;
+            var linkUrl = baseApi + encodeURIComponent(calendarId) + '/events/' + eventId + emailNotify + confecerceCreate;
             var opts = {
                 method: "PATCH",
                 url: linkUrl,
@@ -61,19 +70,23 @@ module.exports = function (RED) {
                     node.status({ fill: "red", shape: "ring", text: "calendar.status.failed" });
                     return;
                 }
-                
                 if (JSON.parse(body).kind == "calendar#event") {
                     msg.payload = "Successfully update event of " + calendarId
+                    msg.meetLink = JSON.parse(body).hangoutLink ? JSON.parse(body).hangoutLink : null;
                     node.status({ fill: "green", shape: "ring", text: "Update successfully" });
                 } else {
                     msg.payload = "Fail to update"
                     node.status({ fill: "red", shape: "ring", text: "Fail to update" });
                 }
-
                 node.send(msg);
             })
         });
     }
+
+    function requestIdGenerator(){
+        return (Math.random() + 1).toString(36);
+    }
+
     RED.nodes.registerType("updateEvent", updateEvent);
 
     RED.httpAdmin.get('/get-calendar-list', function (req, res) {

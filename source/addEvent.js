@@ -74,13 +74,13 @@ module.exports = function(RED) {
                     node.error(error,{});
                     node.status({fill:"red",shape:"ring",text:"calendar.status.failed"});
                     return;
-                }            
+                }       
                 if (JSON.parse(body).kind == "calendar#event") {
                     msg.payload = `Successfully add event to ${calendarId}. ${JSON.parse(body).hangoutLink ? `Link for Meet: ${JSON.parse(body).hangoutLink}`: ""}`
+                    msg.meetLink = JSON.parse(body).hangoutLink ? JSON.parse(body).hangoutLink : null;
                 } else {
                     msg.payload = "Fail"
                 }
-                
                 node.send(msg);
             })        
         });

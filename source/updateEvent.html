@@ -10,7 +10,8 @@
             title: { value: "" },
             description: { value: "" },
             location: { value: "" },
-            emailNotify: { value: true }
+            emailNotify: { value: true },
+            conference: {value: false}
         },
         inputs: 1,
         outputs: 1,
@@ -79,6 +80,10 @@
         <label for="node-input-emailNotify"><i class="fa fa-map-marker"></i> Email notify</label>
         <input type="checkbox" id="node-input-emailNotify" checked style="width:22px; vertical-align:top;">
     </div>
+    <div class="form-row">
+        <label for="node-input-conference"><i class="fa fa-map-marker"></i> Conference</label>
+        <input type="checkbox" id="node-input-conference" placeholder="false">
+    </div>
 </script>
 
 <script type="text/html" data-help-name="updateEvent">
@@ -88,6 +93,7 @@
             <li><b>Title</b> - the summary string from the calendar entry</li>
             <li><b>Description</b> - the description from the calendar entry</li>
             <li><b>Location</b> - the location string from the calendar entry</li>
+            <li><b>Conference</b> - flag for auto-create of google-meet conference</li>  
         </ul>
     </p>
     <p>You can notify all attendees about event changes using the checkbox "Email notify"</p>
