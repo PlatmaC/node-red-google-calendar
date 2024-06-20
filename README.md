@@ -97,11 +97,7 @@ These use cases demonstrate the versatility of integrating Google Calendar with 
 ``` bash
 npm install @platmac/node-red-google-calendar
 ```
-**2.** Double-click the new node so that configuration page opens.
 
-**3.** In the "Credentials"-combo box, select "Add new ... config" and click on the pen icon.
-
-**4.** After giving a readable name, you are asked to insert your api client information. To retrieve it, 
 ## Setup Google Calendar API connection
 
 **1.** Add one of the nodes you want to use to your flow.
@@ -140,6 +136,8 @@ The incoming message can provide the following properties:
 
 * **msg.payload.timemax** - a text search string used to select relevant events
 
+**Notice: time should be entered in timezone that is used in Google Calendar**
+
 example: msg.payload = { timemin:"Feb 12, 2020 00:15:15", timemax:"Feb 13, 2020 00:15:15"
 
 * **msg.calendarId** - a text search string used to select relevant events. Example: msg.calendarId = "abc@gmail.com"
@@ -155,6 +153,8 @@ The message sent from the node will have properties:
 * **start** - Date of start time - midnight for all day event
 
 * **end** - Date of end time - midnight for all day event
+
+**Notice: time will be displayed in timezone that is used in Google Calendar**
 
 * **title** - the summary string from the calendar entry
 
@@ -174,6 +174,8 @@ The incoming message can provide the following properties:
 * **msg.location** - the location string from the calendar entry
 
 * **msg.conference** - the flag to create Google Meet conference for this event
+
+* **msg.timezone** - timezone for entered date.
 
 * **msg.start** - date of start time
 
