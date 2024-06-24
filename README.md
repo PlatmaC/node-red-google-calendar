@@ -126,6 +126,8 @@ npm install @platmac/node-red-google-calendar
 
 **13.** Press the **"Add"** button and you will finish the authorization process.
 
+**14.** Press the **"Deploy"** button and calendar list will fill up with available calendars.
+
 ## List nodes
 **Get Event**
 Return the event in range time from Google Calendar.
@@ -218,14 +220,25 @@ The message sent from the node will have properties:
 ## Example node
 
 Get event from google calendar...<br>
-![get-event](https://cdn.jsdelivr.net/gh/taminhhienmor/node-red-contrib-google-calendar/source/image/getEvent.png)
+![get-event](/examples/get_flow.png)
+![get-calendar-success](/examples/get.png)
+
 ``` node
-[{"id":"10024703.ece9d9","type":"inject","z":"81c8deb7.6db2d","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":320,"y":360,"wires":[["df05d057.adc84"]]},{"id":"e4c18a06.b32d68","type":"debug","z":"81c8deb7.6db2d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":720,"y":360,"wires":[]},{"id":"df05d057.adc84","type":"GetEvent","z":"81c8deb7.6db2d","google":"","calendarId":"taminhhien.mor.vn@gmail.com","time":"03/24/2020 12:00 AM - 03/24/2020 11:59 PM","x":520,"y":360,"wires":[["e4c18a06.b32d68"]]}]
+[ { "id": "275b61dfe7c4f106", "type": "tab", "label": "Flow 1", "disabled": false, "info": "", "env": [] }, { "id": "10024703.ece9d9", "type": "inject", "z": "275b61dfe7c4f106", "name": "", "props": [ { "p": "payload" }, { "p": "topic", "vt": "str" } ], "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 610, "y": 400, "wires": [ [ "df05d057.adc84" ] ] }, { "id": "e4c18a06.b32d68", "type": "debug", "z": "275b61dfe7c4f106", "name": "", "active": true, "tosidebar": true, "console": false, "tostatus": false, "complete": "false", "x": 1010, "y": 400, "wires": [] }, { "id": "df05d057.adc84", "type": "GetEvent", "z": "275b61dfe7c4f106", "google": "", "calendarId": "", "time": "06/18/2024 12:00 AM - 06/30/2024 11:59 PM", "x": 810, "y": 400, "wires": [ [ "e4c18a06.b32d68" ] ] } ]
 ```
 
 Add event to google calendar...<br>
-![add-event](https://cdn.jsdelivr.net/gh/taminhhienmor/node-red-contrib-google-calendar/source/image/addEvent.png)
-![add-event-calendar-success](https://cdn.jsdelivr.net/gh/taminhhienmor/node-red-contrib-google-calendar/source/image/getEventSuccess.png)
+![add-event](/examples/add_flow.png)
+![add-event-calendar-success](/examples/add.png)
+
 ``` node
-[{"id":"1b7a6e62.038442","type":"inject","z":"81c8deb7.6db2d","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":200,"y":160,"wires":[["2d095a31.3d2dc6"]]},{"id":"fda646ee.5e2fa8","type":"debug","z":"81c8deb7.6db2d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":590,"y":160,"wires":[]},{"id":"2d095a31.3d2dc6","type":"addEvent","z":"81c8deb7.6db2d","google":"","calendarId2":"taminhhien.mor.vn@gmail.com","tittle":"Test title","description":"This is description","location":"Ho Chi Minh","time":"03/24/2020 12:00 AM - 03/25/2020 11:59 PM","attend":"1","email1":"abc@example.com","name1":"ABC","email2":"","name2":"","email3":"","name3":"","email4":"","name4":"","email5":"","name5":"","x":390,"y":160,"wires":[["fda646ee.5e2fa8"]]}]
+[ { "id": "a65b6e9c6cc0690b", "type": "tab", "label": "Flow 2", "disabled": false, "info": "", "env": [] }, { "id": "1b7a6e62.038442", "type": "inject", "z": "a65b6e9c6cc0690b", "name": "", "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 580, "y": 380, "wires": [ [ "2d095a31.3d2dc6" ] ] }, { "id": "fda646ee.5e2fa8", "type": "debug", "z": "a65b6e9c6cc0690b", "name": "", "active": true, "tosidebar": true, "console": false, "tostatus": false, "complete": "false", "x": 970, "y": 380, "wires": [] }, { "id": "2d095a31.3d2dc6", "type": "addEvent", "z": "a65b6e9c6cc0690b", "google": "", "calendarId2": "", "timezone": "+3", "conference": true, "tittle": "Test title", "description": "This is description", "location": "Ukraine", "time": "06/25/2024 12:00 AM - 06/26/2024 11:59 PM", "attend": "1", "email1": "test@example.com", "name1": "Test User", "email2": "", "name2": "", "email3": "", "name3": "", "email4": "", "name4": "", "email5": "", "name5": "", "x": 770, "y": 380, "wires": [ [ "fda646ee.5e2fa8" ] ] } ]
+```
+
+Update event from google calendar...<br>
+![update-event](/examples/udp_flow.png)
+![update-event-calendar-success](/examples/upd.png)
+
+``` node
+[ { "id": "1b7a6e62.038442", "type": "inject", "z": "275b61dfe7c4f106", "name": "", "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 620, "y": 760, "wires": [ [ "ebc0922737875a6c" ] ] }, { "id": "fda646ee.5e2fa8", "type": "debug", "z": "275b61dfe7c4f106", "name": "", "active": true, "tosidebar": true, "console": false, "tostatus": false, "complete": "false", "x": 1010, "y": 760, "wires": [] }, { "id": "ebc0922737875a6c", "type": "updateEvent", "z": "275b61dfe7c4f106", "google": "", "calendarId": "", "eventId": "qjpupj9nfsv22e24a0qn010q0o", "title": "New Title", "description": "", "location": "", "emailNotify": true, "conference": false, "x": 820, "y": 760, "wires": [ [ "fda646ee.5e2fa8" ] ] } ]
 ```
