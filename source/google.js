@@ -27,7 +27,7 @@ module.exports = function(RED) {
         this.displayName = n.displayName;
         this.eventEmitter = new events();
     }
-    RED.nodes.registerType("google-credentials",GoogleNode,{
+    RED.nodes.registerType("google-api-credentials",GoogleNode,{
         credentials: {
             displayName: {type:"text"},
             clientId: {type:"text"},
@@ -168,7 +168,7 @@ module.exports = function(RED) {
         exponentialBackoff.emit('ready');
     };
 
-    RED.httpAdmin.get('/google-credentials/auth', function(req, res){
+    RED.httpAdmin.get('/google-api-credentials/auth', function(req, res){
         if (!req.query.clientId || !req.query.clientSecret ||
             !req.query.id || !req.query.callback) {
             res.send(400);
@@ -204,7 +204,7 @@ module.exports = function(RED) {
         RED.nodes.addCredentials(node_id, credentials);
     });
 
-    RED.httpAdmin.get('/google-credentials/auth/callback', function(req, res) {
+    RED.httpAdmin.get('/google-api-credentials/auth/callback', function(req, res) {
         if (req.query.error) {
             return res.send(RED._("google.error.error", {error: req.query.error, description: req.query.error_description}));
         }

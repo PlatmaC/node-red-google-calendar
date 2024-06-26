@@ -6,7 +6,7 @@
 var request = require('request');
 module.exports = function (RED) {
     "use strict";
-    function updateEvent(n) {
+    function updateEventAtCalendar(n) {
         RED.nodes.createNode(this, n);
         this.google = RED.nodes.getNode(n.google);
         if (!this.google || !this.google.credentials.accessToken) {
@@ -73,6 +73,7 @@ module.exports = function (RED) {
                 if (JSON.parse(body).kind == "calendar#event") {
                     msg.payload = "Successfully update event of " + calendarId
                     msg.meetLink = JSON.parse(body).hangoutLink ? JSON.parse(body).hangoutLink : null;
+                    msg.thisEventId = JSON.parse(body).id
                     node.status({ fill: "green", shape: "ring", text: "Update successfully" });
                 } else {
                     msg.payload = "Fail to update"
@@ -87,7 +88,7 @@ module.exports = function (RED) {
         return (Math.random() + 1).toString(36);
     }
 
-    RED.nodes.registerType("updateEvent", updateEvent);
+    RED.nodes.registerType("updateEventAtCalendar", updateEventAtCalendar);
 
     RED.httpAdmin.get('/get-calendar-list', function (req, res) {
         var googleId = req.query.id;

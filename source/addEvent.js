@@ -1,7 +1,7 @@
 var request = require('request');
 module.exports = function(RED) {
     "use strict";
-    function addEvent(n) {
+    function addEventToCalendar(n) {
         RED.nodes.createNode(this,n);            
         this.google = RED.nodes.getNode(n.google);        
         if (!this.google || !this.google.credentials.accessToken) {
@@ -78,14 +78,17 @@ module.exports = function(RED) {
                 if (JSON.parse(body).kind == "calendar#event") {
                     msg.payload = `Successfully add event to ${calendarId}. ${JSON.parse(body).hangoutLink ? `Link for Meet: ${JSON.parse(body).hangoutLink}`: ""}`
                     msg.meetLink = JSON.parse(body).hangoutLink ? JSON.parse(body).hangoutLink : null;
+                    msg.eventId = JSON.parse(body).id
+                    node.status({ fill: "green", shape: "ring", text: "Added successfully" });
                 } else {
                     msg.payload = "Fail"
+                    node.status({ fill: "red", shape: "ring", text: "Fail to add" });
                 }
                 node.send(msg);
             })        
         });
     }
-    RED.nodes.registerType("addEvent", addEvent);
+    RED.nodes.registerType("addEventToCalendar", addEventToCalendar);
 
     function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;

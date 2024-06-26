@@ -14,7 +14,7 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="google-credentials">
+<script type="text/x-red" data-template-name="google-api-credentials">
     <div id="node-config-google-client-keys">
         <div class="form-row">
             <p style="margin-top: 10px;"><b>1.</b> <span data-i18n="google.label.create"></span> <a href="https://developers.google.com/api-client-library/javascript/start/start-js#Getkeysforyourapplication" target="_blank" style="text-decoration:underline;"><span data-i18n="google.label.instructions"></span></a></p>
@@ -54,7 +54,7 @@
 
 <script type="text/javascript">
 (function() {
-    RED.nodes.registerType('google-credentials',{
+    RED.nodes.registerType('google-api-credentials',{
         category: 'config',
         defaults: {
             displayName: {value:""}
@@ -84,14 +84,14 @@
                 callback = location.protocol + "//" +
                            dummyDomain +
                            (location.port?":"+location.port:"")+
-                           pathname + "google-credentials/auth/callback";
+                           pathname + "google-api-credentials/auth/callback";
                 tip = this._("google.tip.privateip", {callback: callback, dummyDomain: dummyDomain, actualIP: actualIP});
                 $("#node-config-google-tooltip").html(tip);
             } else {
                 callback = location.protocol + "//" +
                            location.hostname +
                            (location.port?":"+location.port:"")+
-                           pathname + "google-credentials/auth/callback";
+                           pathname + "google-api-credentials/auth/callback";
                 tip = this._("google.tip.configure", {callback: callback});
                 $("#node-config-google-tooltip").html(tip);
             }
@@ -113,7 +113,7 @@
             }
 
             function pollGoogleCredentials() {
-                $.getJSON('credentials/google-credentials/'+id,function(data) {
+                $.getJSON('credentials/google-api-credentials/'+id,function(data) {
                     if (data.displayName) {
                         $("#node-config-dialog-ok").button("enable");
                         updateGoogleDisplayName(data.displayName);
@@ -138,7 +138,7 @@
             $("#node-config-start-auth").mousedown(function() {
                 var clientId = $("#node-config-input-clientId").val();
                 var clientSecret = $("#node-config-input-clientSecret").val();
-                var url = 'google-credentials/auth?id='+id+'&clientId='+clientId+"&clientSecret="+clientSecret+"&callback="+encodeURIComponent(callback);
+                var url = 'google-api-credentials/auth?id='+id+'&clientId='+clientId+"&clientSecret="+clientSecret+"&callback="+encodeURIComponent(callback);
                 $(this).attr("href",url);
                 // window.googleConfigNodeIntervalId = window.setTimeout(pollGoogleCredentials,2000);
             });

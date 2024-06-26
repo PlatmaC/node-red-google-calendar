@@ -1,10 +1,10 @@
 <script type="text/javascript">
     var selected1;
-    RED.nodes.registerType('updateEvent', {
+    RED.nodes.registerType('updateEventAtCalendar', {
         category: 'Google calendar event',
         color: "#C0DEED",
         defaults: {
-            google: { type: "google-credentials", required: true },
+            google: { type: "google-api-credentials", required: true },
             calendarId: { value: "" },
             eventId: { value: "" },
             title: { value: "" },
@@ -51,7 +51,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-<script type="text/x-red" data-template-name="updateEvent">
+<script type="text/x-red" data-template-name="updateEventAtCalendar">
     <div class="form-row">
         <label for="node-input-google"><i class="fa fa-user"></i> Google Account</label>
         <input type="text" id="node-input-google">
@@ -86,7 +86,7 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="updateEvent">
+<script type="text/html" data-help-name="updateEventAtCalendar">
     <p>Update an event occurs in a <a href="https://www.google.com/calendar">Google Calendar</a>.</p>
     <p>This node can update the following properties:
         <ul>

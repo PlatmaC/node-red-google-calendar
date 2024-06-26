@@ -1,0 +1,144 @@
+[
+    {
+        "id": "275b61dfe7c4f106",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "10024703.ece9d9",
+        "type": "inject",
+        "z": "275b61dfe7c4f106",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "af9a0d95d423b348"
+            ]
+        ]
+    },
+    {
+        "id": "e4c18a06.b32d68",
+        "type": "debug",
+        "z": "275b61dfe7c4f106",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "af9a0d95d423b348",
+        "type": "addEventToCalendar",
+        "z": "275b61dfe7c4f106",
+        "google": "",
+        "calendarId2": "",
+        "timezone": "+3",
+        "conference": true,
+        "tittle": "Test title",
+        "description": "This is description",
+        "location": "Ukraine",
+        "time": "06/25/2024 12:00 AM - 06/26/2024 11:59 PM",
+        "attend": "1",
+        "email1": "test@example.com",
+        "name1": "Test User",
+        "email2": "",
+        "name2": "",
+        "email3": "",
+        "name3": "",
+        "email4": "",
+        "name4": "",
+        "email5": "",
+        "name5": "",
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "8c6dcad79aa7f42b"
+            ]
+        ]
+    },
+    {
+        "id": "8c6dcad79aa7f42b",
+        "type": "updateEventAtCalendar",
+        "z": "275b61dfe7c4f106",
+        "google": "",
+        "calendarId": "",
+        "eventId": "",
+        "title": "Updated Title",
+        "description": "",
+        "location": "",
+        "emailNotify": true,
+        "conference": false,
+        "x": 800,
+        "y": 400,
+        "wires": [
+            [
+                "cc3bb2538640b2e0"
+            ]
+        ]
+    },
+    {
+        "id": "6640b792fc566be1",
+        "type": "getEventFromCalendar",
+        "z": "275b61dfe7c4f106",
+        "google": "",
+        "calendarId": "",
+        "time": "06/18/2024 12:00 AM - 06/30/2024 11:59 PM",
+        "x": 600,
+        "y": 480,
+        "wires": [
+            [
+                "e4c18a06.b32d68"
+            ]
+        ]
+    },
+    {
+        "id": "cc3bb2538640b2e0",
+        "type": "delay",
+        "z": "275b61dfe7c4f106",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 480,
+        "wires": [
+            [
+                "6640b792fc566be1"
+            ]
+        ]
+    }
+]

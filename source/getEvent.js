@@ -1,6 +1,6 @@
 module.exports = function(RED) {
     "use strict";
-    function getEvent(n) {
+    function getEventFromCalendar(n) {
         RED.nodes.createNode(this,n);
         this.google = RED.nodes.getNode(n.google);
         if (!this.google || !this.google.credentials.accessToken) {
@@ -75,7 +75,7 @@ module.exports = function(RED) {
             })
         });
     }
-    RED.nodes.registerType("GetEvent", getEvent);
+    RED.nodes.registerType("getEventFromCalendar", getEventFromCalendar);
 
     function convertTimeFormat(time) {
         return time > 9 ? time : '0' + time;

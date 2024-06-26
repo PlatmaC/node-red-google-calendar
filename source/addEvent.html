@@ -1,10 +1,10 @@
 <script type="text/javascript">
     var selected1;
-    RED.nodes.registerType('addEvent', {
+    RED.nodes.registerType('addEventToCalendar', {
         category: 'Google calendar event',
         color: "#C0DEED",
         defaults: {
-            google: { type: "google-credentials", required: true },
+            google: { type: "google-api-credentials", required: true },
             calendarId2: { value: "" },
             timezone: {value: "+0"},
             conference: {value: false},
@@ -113,7 +113,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-<script type="text/x-red" data-template-name="addEvent">
+<script type="text/x-red" data-template-name="addEventToCalendar">
     <div class="form-row">
         <label for="node-input-google"><i class="fa fa-user"></i> Google Account</label>
         <input type="text" id="node-input-google">
@@ -239,7 +239,7 @@
     
 </script>
 
-<script type="text/html" data-help-name="addEvent">
+<script type="text/html" data-help-name="addEventToCalendar">
     <p>Send a message every time an event occurs in a <a href="https://www.google.com/calendar">Google Calendar</a>.</p>
     <p>The incoming message can provide the following properties:
         <ul>
