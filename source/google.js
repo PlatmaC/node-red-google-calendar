@@ -273,7 +273,7 @@ module.exports = function(RED) {
     function GoogleAPINode(n) {
         RED.nodes.createNode(this,n);
     }
-    RED.nodes.registerType("google-api-config",GoogleAPINode,{
+    RED.nodes.registerType("google-api-auth-config",GoogleAPINode,{
         credentials: {
             key: { type:"password" }
         }

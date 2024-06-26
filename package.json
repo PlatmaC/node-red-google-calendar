@@ -1,6 +1,6 @@
 {
     "name": "@platmac/node-red-google-calendar",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "author": "Hooke Jr. <platma@platma.com>",
     "description": "The simplest of simple nodes with google calendar",
     "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     "node-red": {
         "version": ">=3.1.9",
         "nodes": {
-            "google-api-config": "source/google.js",
+            "google-api-auth-config": "source/google.js",
             "addEvent": "source/addEvent.js",
             "getEvent": "source/getEvent.js",
             "updateEvent": "source/updateEvent.js"
@@ -28,7 +28,7 @@
         "backoff": "^2.5.0",
         "crypto": "^1.0.1",
         "events": "^3.3.0",
-        "node-red": "~1.0.3",
+        "node-red": "^1.0.3",
         "request": "^2.88.0",
         "url": "^0.11.3"
     }

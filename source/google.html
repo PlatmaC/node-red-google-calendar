@@ -166,7 +166,7 @@
 })();
 </script>
 
-<script type="text/x-red" data-template-name="google-api-config">
+<script type="text/x-red" data-template-name="google-api-auth-config">
     <div class="form-row">
         <label for="node-config-input-key"><i class="fa fa-bookmark"></i><span data-i18n="google.label.apikey"></span></label>
         <input class="input-append-left" type="password" id="node-config-input-key" style="width: 40%;" >
@@ -180,7 +180,7 @@
 
 <script type="text/javascript">
 (function() {
-    RED.nodes.registerType('google-api-config',{
+    RED.nodes.registerType('google-api-auth-config',{
         category: 'config',
         defaults: { },
         credentials: {
