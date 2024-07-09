@@ -2,9 +2,7 @@ Fork of the node-red-contrib-google-calendar package.
 [node-red-contrib-google-calendar repository](https://github.com/taminhhienmor/node-red-contrib-google-calendar.git)
 
 ## Features
-Add new event on google-calendar
-Update event on google-calendar
-Get event on google-calendar
+Add new, update and retrieve list of events on google-calendar
 
 ## Use Cases
 **1. Automated Meeting Reminders**
@@ -130,6 +128,7 @@ npm install @platmac/node-red-google-calendar
 
 ## List nodes
 **Get Event**
+
 Return the event in range time from Google Calendar.
 
 The incoming message can provide the following properties:
@@ -163,6 +162,7 @@ The message sent from the node will have properties:
 * **attendees** - list of objects containing name and email properties
 
 **Add Event**
+
 Send a message every time an event occurs in a Google Calendar.
 
 The incoming message can provide the following properties:
@@ -191,6 +191,7 @@ The message sent from the node will have properties:
 
 
 **Update Event**
+
 Update an event occurs in a Google Calendar.
 
 The incoming message can provide the following properties:

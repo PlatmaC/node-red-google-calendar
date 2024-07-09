@@ -1,8 +1,8 @@
 {
     "name": "@platmac/node-red-google-calendar",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "author": "Hooke Jr. <platma@platma.com>",
-    "description": "The simplest of simple nodes with google calendar",
+    "description": "The simplest node for google calendar events",
     "license": "Apache-2.0",
     "keywords": [
         "node-red",
