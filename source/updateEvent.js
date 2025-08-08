@@ -73,6 +73,7 @@ module.exports = function (RED) {
                 if (JSON.parse(body).kind == "calendar#event") {
                     msg.payload = "Successfully update event of " + calendarId
                     msg.meetLink = JSON.parse(body).hangoutLink ? JSON.parse(body).hangoutLink : null;
+                    msg.eventLink = JSON.parse(body).htmlLink ? JSON.parse(body).htmlLink : null;
                     msg.thisEventId = JSON.parse(body).id
                     node.status({ fill: "green", shape: "ring", text: "Update successfully" });
                 } else {

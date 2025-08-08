@@ -64,7 +64,9 @@ module.exports = function(RED) {
                         "StartDate" : startDate,
                         "EndDate" : endDate,
                         "Title" : title,
-                        "Attendees" : attend
+                        "Attendees" : attend,
+                        "EventLink" : val.htmlLink || null,
+                        "MeetLink" : val.hangoutLink || null
                     }
                     arrObj.push(obj);
                 })
